@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.alwinlowdham.afc.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "minVersion": "0.8",
+  "refmap": "afc.refmap.json",
+  "mixins": [
+    "MeleeAttackGoalMixin",
+    "MobEntityMixin",
+    "PlayerEntityMixin"
+  ],
+  "client": [
+    "GameRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
