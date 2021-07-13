@@ -80,7 +80,7 @@ public class AFCMod {
 		LivingEntity entity = event.getEntityLiving();
 		double bbWidth = entity.getBbWidth();
 		double appendageLength = 1.0D;
-		if (entity instanceof WitherSkeletonEntity || entity instanceof ZombieEntity) {
+		if (entity instanceof ZombieEntity) {
 			entity.getAttribute(ForgeMod.REACH_DISTANCE.get()).setBaseValue(0.5*bbWidth + appendageLength);
 		}
 	}
