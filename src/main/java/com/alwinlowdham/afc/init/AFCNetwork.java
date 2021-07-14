@@ -1,8 +1,7 @@
 package com.alwinlowdham.afc.init;
 
 import com.alwinlowdham.afc.Ref;
-import com.alwinlowdham.afc.networking.AddThrustPacket;
-import com.alwinlowdham.afc.networking.RemoveThrustPacket;
+import com.alwinlowdham.afc.networking.toserver.AttackPacket;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -24,13 +23,11 @@ public class AFCNetwork {
     protected static int nextPacketID = 0;
 
     public static void init(){
-        INSTANCE.registerMessage(getNextPacketID(), AddThrustPacket.class, AddThrustPacket::encode, AddThrustPacket::decode, AddThrustPacket.Handler::handle);
-        INSTANCE.registerMessage(getNextPacketID(), RemoveThrustPacket.class, RemoveThrustPacket::encode, RemoveThrustPacket::decode, RemoveThrustPacket.Handler::handle);
+        INSTANCE.registerMessage(getNextPacketID(), AttackPacket.class, AttackPacket::encode, AttackPacket::decode, AttackPacket.Handler::handle);
     }
 
     public static int getNextPacketID(){
-        int id = nextPacketID++;
-        return id;
+        return nextPacketID++;
     }
 
     public static void sendPacketTo(Object packet, ServerPlayerEntity player){

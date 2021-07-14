@@ -3,16 +3,12 @@ package com.alwinlowdham.afc;
 import com.alwinlowdham.afc.init.*;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.WitherSkeletonEntity;
 import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.entity.player.PlayerEntity;
 
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -26,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.stream.Collectors;
 
 /* Make nights actually realistically dark, varying by moon phase. */
+/* Add bleed next. Just copy and past wither effect and change the textures.*/
 
 @Mod(Ref.MOD_ID)
 public class AFCMod {
@@ -40,6 +37,7 @@ public class AFCMod {
 
 		MinecraftForge.EVENT_BUS.register(this);
 
+		AFCEffects.init();
 		AFCItems.init();
 	}
 
@@ -81,7 +79,8 @@ public class AFCMod {
 		double bbWidth = entity.getBbWidth();
 		double appendageLength = 1.0D;
 		if (entity instanceof ZombieEntity) {
-			entity.getAttribute(ForgeMod.REACH_DISTANCE.get()).setBaseValue(0.5*bbWidth + appendageLength);
+			entity.getAttribute(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get())
+					.setBaseValue(0.5*bbWidth + appendageLength);
 		}
 	}
 

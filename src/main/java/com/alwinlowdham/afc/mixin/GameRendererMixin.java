@@ -16,20 +16,18 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 
-import net.minecraftforge.common.ForgeMod;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-// need to change this so it is not an overwrite
+import java.util.Optional;
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
 
-    @Shadow
-    private Minecraft minecraft;
+    @Shadow private Minecraft minecraft;
 
+    // DONE?
     @Overwrite
     public void pick(float p_78473_1_) {
         Entity entity = this.minecraft.getCameraEntity();
@@ -42,7 +40,7 @@ public abstract class GameRendererMixin {
                 if (item.getItem() instanceof IReach) {
                     reach = ((IReach) item).getReach();
                 }
-                double totalReach = reach + this.minecraft.player.getAttribute(ForgeMod.REACH_DISTANCE.get()).getBaseValue();
+                double totalReach = reach + this.minecraft.player.getAttribute(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get()).getBaseValue();
                 double d0 = totalReach;
                 this.minecraft.hitResult = entity.pick(d0, p_78473_1_, false);
                 Vector3d vector3d = entity.getEyePosition(p_78473_1_);
@@ -72,6 +70,11 @@ public abstract class GameRendererMixin {
                     return !p_215312_0_.isSpectator() && p_215312_0_.isPickable();
                 }, d1);
                 if (entityraytraceresult != null) {
+
+                    /*Begin experimental*/
+
+                    /*End experimental*/
+
                     Entity entity1 = entityraytraceresult.getEntity();
                     Vector3d vector3d3 = entityraytraceresult.getLocation();
                     double d2 = vector3d.distanceToSqr(vector3d3);
@@ -84,7 +87,6 @@ public abstract class GameRendererMixin {
                         }
                     }
                 }
-
                 this.minecraft.getProfiler().pop();
             }
         }

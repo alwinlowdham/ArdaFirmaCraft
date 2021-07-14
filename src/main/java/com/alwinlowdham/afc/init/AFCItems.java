@@ -16,9 +16,7 @@ public class AFCItems {
 
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Ref.MOD_ID);
 
-	public static void init() {
-		ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-	}
+	public static void init() { ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus()); }
 
 	// Add a new Arming Sword called Arming Sword (Spatulate)
 

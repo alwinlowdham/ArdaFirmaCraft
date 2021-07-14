@@ -12,25 +12,39 @@ import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.TieredItem;
 
+import java.lang.Math;
+
 public class AFCWeaponItem extends TieredItem implements IReach {
 
     private final Multimap<Attribute, AttributeModifier> swingModifiers;
     private final Multimap<Attribute, AttributeModifier> thrustModifiers;
 
-    private String[] type;
+    private final String[] type;
     private int hands;
-    private boolean handOff;
-    private float reach;
+    private final boolean handOff;
+    private final float reach;
 
-    private float swingDamage;
-    private float swingSpeed;
-    private char swingDamageType;
-    private int swingAP;
+    private final float swingDamage;
+    private final float swingSpeed;
+    private final char swingDamageType;
+    private final int swingAP;
 
-    private float thrustDamage;
-    private float thrustSpeed;
-    private char thrustDamageType;
-    private int thrustAP;
+    private final float thrustDamage;
+    private final float thrustSpeed;
+    private final char thrustDamageType;
+    private final int thrustAP;
+
+    private final int defenseTN;
+    private final int guardAV;
+
+    private final boolean balanced;
+    private final boolean light;
+    private final boolean heavy;
+    private final float weight;
+
+    private final int bloody;
+    private final int shock;
+    private final int crushing;
 
     public AFCWeaponItem(IItemTier tier,
                      String[] type, int hands, boolean handOff, float reach,
@@ -44,25 +58,50 @@ public class AFCWeaponItem extends TieredItem implements IReach {
                      boolean tightGrip, boolean thinBlade,
                      Properties properties) {
         super(tier, properties);
-        this.swingDamage = swingDamageIn + tier.getAttackDamageBonus();
-        this.swingSpeed = -(swingTN - 5.0F)/4.0F + (balanced ? 0.0F : -0.25F);
-        this.thrustDamage = thrustDamageIn + tier.getAttackDamageBonus();
-        this.thrustSpeed = -(thrustTN - 5.0F)/4.0F + (balanced ? 0.0F : -0.25F);
-        // algorithim from TN to speed needs to be changed
-        // also need to make sure any attack speed changes on thrusts are actually working
 
+        final float e = (float) Math.E;
+        final float pi = (float) Math.PI;
+        final float b = balanced ? 0.0F : e/(pi*pi);
+
+        this.type = type;
+        this.hands = hands;
+        this.handOff = handOff;
         this.reach = reach;
+
+        this.swingDamage = swingDamageIn + tier.getAttackDamageBonus();
+        this.swingSpeed = -(swingTN - 6.0F)/e - b;
+        this.swingDamageType = swingDamageType;
+        this.swingAP = swingAP;
+
+        this.thrustDamage = thrustDamageIn + tier.getAttackDamageBonus();
+        this.thrustSpeed = -(thrustTN - 6.0F)/e - b;
+        this.thrustDamageType = thrustDamageType;
+        this.thrustAP = thrustAP;
+
+        this.defenseTN = defenseTN;
+        this.guardAV = guardAV;
+        this.balanced = balanced;
+        this.light = light;
+        this.heavy = heavy;
+        this.weight = weight;
+
+        this.bloody = bloody;
+        this.shock = shock;
+        this.crushing = crushing;
+
+        // algorithm for TN to speed may need to be changed
+        // also need to make sure any attack speed changes on thrusts are actually working
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> swingBuilder = ImmutableMultimap.builder();
         swingBuilder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",
-                this.swingDamage, AttributeModifier.Operation.ADDITION));
+                0.0F, AttributeModifier.Operation.ADDITION));
         swingBuilder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier",
                 this.swingSpeed, AttributeModifier.Operation.ADDITION));
         this.swingModifiers = swingBuilder.build();
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> thrustBuilder = ImmutableMultimap.builder();
         thrustBuilder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",
-                this.thrustDamage, AttributeModifier.Operation.ADDITION));
+                0.0F, AttributeModifier.Operation.ADDITION));
         thrustBuilder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier",
                 this.thrustSpeed, AttributeModifier.Operation.ADDITION));
         this.thrustModifiers = thrustBuilder.build();

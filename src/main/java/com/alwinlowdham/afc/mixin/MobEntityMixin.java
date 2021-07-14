@@ -14,7 +14,7 @@ public abstract class MobEntityMixin {
     @Overwrite
     public static AttributeModifierMap.MutableAttribute createMobAttributes() {
         return LivingEntity.createLivingAttributes()
-                .add(Attributes.FOLLOW_RANGE, 64.0D)
+                .add(Attributes.FOLLOW_RANGE, 16.0D)
                 .add(Attributes.ATTACK_KNOCKBACK)
                 .add(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get());
     }

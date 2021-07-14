@@ -14,11 +14,11 @@ public abstract class PlayerEntityMixin {
     @Overwrite
     public static AttributeModifierMap.MutableAttribute createAttributes() {
         return LivingEntity.createLivingAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 1.0D)
+                .add(Attributes.ATTACK_DAMAGE, 0.0D)
                 .add(Attributes.MOVEMENT_SPEED, (double)0.1F)
                 .add(Attributes.ATTACK_SPEED, 2.0D)
                 .add(Attributes.LUCK)
-                .add(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get(), 1.425D);
+                .add(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get(), 1.5D);
     }
 }
 

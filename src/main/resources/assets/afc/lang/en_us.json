@@ -1,4 +1,10 @@
 {
+  "effect.afc.bleed_internal_oozing": "Bleed (Internal)",
+  "effect.afc.bleed_internal_spurting": "Bleed (Internal)",
+  "effect.afc.bleed_internal_trickling": "Bleed (Internal)",
+  "effect.afc.bleed_oozing": "Bleed (Oozing)",
+  "effect.afc.bleed_spurting": "Bleed (Spurting)",
+  "effect.afc.bleed_trickling": "Bleed (Trickling)",
   "item.afc.stone_arming_sword_broad": "Stone Arming Sword (Broad)",
   "item.afc.stone_arming_sword_tapered": "Stone Arming Sword (Tapered)",
   "item.afc.stone_hatchet_war": "Stone War Hatchet",
