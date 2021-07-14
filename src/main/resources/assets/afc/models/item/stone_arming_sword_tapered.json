@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "afc:items/stone_arming_sword_tapered"
+  }
+}
